@@ -2,7 +2,7 @@
   <div class="layout">
     <Layout>
       <Sider ref="side1" hide-trigger collapsible :collapsed-width="80" v-model="isCollapsed" style="overflow-y: auto">
-        <div class="layout-logo-left" :style="isCollapsed ? 'font-size:12px': ''">博客后台管理系统</div>
+        <div class="layout-logo-left" :style="isCollapsed ? 'font-size:12px': ''">博客后台</div>
         <Menu
           :accordion="true"
           width="auto"

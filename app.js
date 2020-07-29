@@ -10,10 +10,10 @@ const catchError = require('./middlewares/exception')
 
 const app = new Koa()
 
-app.use(koaStatic(__dirname + '/public'))
-app.use(views(resolve(__dirname, './views'), {
-  extension: 'ejs'
-}))
+// app.use(koaStatic(__dirname + '/public'))
+// app.use(views(resolve(__dirname, './views'), {
+//   extension: 'ejs'
+// }))
 app.use(cors())
 app.use(catchError)
 app.use(parser())

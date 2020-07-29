@@ -63,8 +63,8 @@
           v-model="formValidate.content"
           :ishljs="true"
           :toolbars="toolbars"
-          
-          @imgAdd="imgAdd"
+    
+          @imgAdd="$imgAdd"
          
           ref="md"
         >
@@ -85,7 +85,7 @@
 <script>
 import { mapActions } from "vuex";
 import getUploadToken from "../../libs/upload-token";
-import $axios from 'axios';
+import upFile from "../../libs/mavon-img";
 
 export default {
   data() {
@@ -174,26 +174,40 @@ export default {
       getCategoryList: "category/getCategoryList"
     }),
     //富文本上传图片
-    imgAdd(pos, file) {
-        // 第一步.将图片上传到服务器.
-        let self = this
-        let formdata = new FormData();
-        let $vm = self.$refs.md
-        formdata.append('file', file)
-        self.$axios({
-          url: '/img/uploadImg',
-          method: 'post',
-          data: formdata,
-          headers: {'Content-Type': 'multipart/form-data'},
-        }).then((res) => {
-          // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
-          /**
-           * $vm 指为mavonEditor实例，可以通过如下两种方式获取
-           * 1. 通过引入对象获取: `import {mavonEditor} from ...` 等方式引入后，`$vm`为`mavonEditor`
-           * 2. 通过$refs获取: html声明ref : `<mavon-editor ref=md ></mavon-editor>，`$vm`为 `this.$refs.md`
-           */
-          $vm.$img2Url(pos, res.data.img);
-        })
+    $imgAdd(pos, file) {
+
+     upFile(file,this.token);
+    //  console.log(res);
+    //     if(res===200){
+    //       this.$Message.success('上传成功')
+    //       let url = res.data.key
+    //       this.$refs.md.$img2Url(pos, 'http://qdm05omqc.bkt.clouddn.com/' + url)
+    //     } else {
+    //       this.$Message.error(res.statusText)
+    //     }
+      
+        // // 第一步.将图片上传到服务器.
+        // let formdata = new FormData();
+        // formdata.append('file', file)
+        //  formdata.append('token', this.token)
+        
+        // let instance = $axios.create({
+        //         headers: {
+        //             token: this.token,
+        //             'Content-Type': 'multipart/form-data'
+        //         }
+        // })
+        // instance.post('http://up-z2.qiniu.com', formdata).then(res => {
+        //         console.log(res);
+        //         if(res.status===200){
+        //           this.$Message.success('上传成功')
+        //           let url = res.data.key
+        //           //$vm.$img2Url(pos, url);
+        //           this.$refs.md.$img2Url(pos, 'http://qdm05omqc.bkt.clouddn.com/' + url)
+        //         } else {
+        //           this.$Message.error(res.statusText)
+        //         }
+        //     })
       },
     
 

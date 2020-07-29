@@ -5,18 +5,29 @@ import Vuex from 'vuex';
 import Util from './libs/util'
 import App from './app.vue';
 import store from './vuex'
-import {sync} from 'vuex-router-sync'
+import { sync } from 'vuex-router-sync'
 import VueLocalStorage from 'vue-ls';
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 import './assets/style/admin.css';
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+import hljs from "highlight.js"; //导入代码高亮文件
+import "highlight.js/styles/googlecode.css";
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(iView);
 Vue.use(mavonEditor);
+
+//use v-highlight
+//自定义一个代码高亮指令
+Vue.directive('highlight', function (el) {
+  let highlight = el.querySelectorAll('pre code');
+  highlight.forEach((block) => {
+    hljs.highlightBlock(block)
+  })
+})
 
 Vue.use(VueLocalStorage, {
   namespace: 'boblog-'
@@ -30,7 +41,7 @@ const RouterConfig = {
     if (savedPosition) {
       return savedPosition
     } else {
-      return {x: 0, y: 0}
+      return { x: 0, y: 0 }
     }
   }
 };

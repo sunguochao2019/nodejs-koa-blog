@@ -12,8 +12,8 @@ import 'iview/dist/styles/iview.css';
 import './assets/style/admin.css';
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
-import hljs from "highlight.js"; //导入代码高亮文件
-import "highlight.js/styles/googlecode.css";
+import hljs from 'highlight.js' //导入代码高亮文件
+import 'highlight.js/styles/googlecode.css'  
 
 Vue.use(VueRouter);
 Vue.use(Vuex);

@@ -30,6 +30,7 @@
             :defaultOpen="'preview'"
             :editable="false"
             :subfield="false"
+            v-highlight
             :toolbarsFlag="false"/>
       </div>
 

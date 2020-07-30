@@ -66,7 +66,9 @@
           @imgAdd="$imgAdd"
           @imgDel="$imgDel"
           :ishljs="true"
+          :codeStyle="codeStyle"
           :toolbars="toolbars"
+          v-highlight
           :toolbarsBackground="'#f9f9f9'"
           style="height: calc(100vh - 50px)"
         ></mavon-editor>
@@ -130,7 +132,7 @@ export default {
         undo: true, // 上一步
         redo: true, // 下一步
         trash: true, // 清空
-        save: false, // 保存（触发events中的save事件）
+        save: true, // 保存（触发events中的save事件）
         /* 1.4.2 */
         navigation: true, // 导航目录
         /* 2.1.8 */
@@ -141,6 +143,7 @@ export default {
         subfield: true, // 单双栏模式
         preview: false // 预览
       },
+      codeStyle:'monokai-sublime',//主题
       ruleValidate: {
         title: [
           { required: true, message: "文章标题不能为空", trigger: "blur" }
@@ -189,11 +192,11 @@ export default {
       });
 
       instance.post("http://up-z2.qiniu.com", formdata).then(res => {
-        console.log(res);
+        //console.log(res);
         if (res.status === 200) {
           this.$Message.success("上传成功");
           let url = res.data.key;
-          console.log(url);
+          //console.log(url);
           this.$refs.md.$img2Url(
             pos,
             "http://qdm05omqc.bkt.clouddn.com/" + url

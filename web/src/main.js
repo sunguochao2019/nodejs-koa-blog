@@ -8,6 +8,8 @@ import 'view-design/dist/styles/iview.css'
 import VueLazyLoad from 'vue-lazyload'
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+import hljs from 'highlight.js'
+import 'highlight.js/styles/googlecode.css'
 
 import {
   Input,
@@ -40,6 +42,15 @@ Vue.use(VueLazyLoad, {
 })
 
 Vue.use(mavonEditor)
+// use v-highlight
+// 自定义一个代码高亮指令
+Vue.directive('highlight', function (el) {
+  let highlight = el.querySelectorAll('pre code')
+
+  highlight.forEach((block) => {
+    hljs.highlightBlock(block)
+  })
+})
 
 Vue.prototype.$Message = Message
 Vue.config.productionTip = false
